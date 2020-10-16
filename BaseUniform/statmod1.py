@@ -3,18 +3,22 @@
 
 # # ИиСМ, Журик Н.С., группа 6, курс 4, ЛР 1
 
-# In[1]:
+# In[2]:
 
 
 import numpy as np
 import scipy as sp
 from matplotlib import pyplot as plt
+
+import sys
+sys.path.append('../')
+
 from utils import *
 
 
 # Реализуем мультипликативный конгруэнтный генератор. Это по сути простейший генератор псевдослучайных чисел, посмотрим, как он покажет себя на практике.
 
-# In[2]:
+# In[3]:
 
 
 class UniformDistribution:
@@ -46,11 +50,12 @@ class UniformDistribution:
 
 # Ниже приведён пайплайн для анализа характеристик полученного генератора и сравнения с генератором, реализованным в numpy (из интереса, реализовать свою версию того, чем часто пользуешься, всегда интересно).
 
-# In[3]:
+# In[4]:
 
 
 def rv_test_pipeline_uniform(dist, np_dist, dist_cdf):
     sampling_sizes = [30, 50, 100, 300, 500, 1000]
+    np.random.seed(1203248318)
 
     seqs = []
     means = []
@@ -77,8 +82,8 @@ def rv_test_pipeline_uniform(dist, np_dist, dist_cdf):
     np_stds = np.array(np_stds)
     plot_conv_comparison(sampling_sizes, means, np_means, exact_mean=dist.mean())
     plot_autocov_comparison(seqs[-1], np_seqs[-1])
-    plot_scatter_comparison(seqs[3], np_seqs[3])
-    plot_hist_comparison(seqs[3], np_seqs[3])
+    plot_scatter_comparison(seqs[-1], np_seqs[-1])
+    plot_hist_comparison(seqs[-1], np_seqs[-1])
     
     n_bins_chi2 = 5
     EPS = 0.05
@@ -93,7 +98,7 @@ def rv_test_pipeline_uniform(dist, np_dist, dist_cdf):
         print()
 
 
-# In[4]:
+# In[5]:
 
 
 if __name__ == "__main__":
