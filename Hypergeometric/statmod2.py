@@ -9,13 +9,12 @@
 import numpy as np
 import scipy as sp
 from scipy import stats
+
+import sys
+sys.path.append('../')
+
 from utils import *
-
-
-# In[2]:
-
-
-from statmod1 import UniformDistribution
+from BaseUniform.statmod1 import UniformDistribution
 
 
 # Навскидку существует около двух способов сгенерировать данную СВ.
@@ -166,7 +165,7 @@ def rv_test_pipeline_hypergeom(dist, np_dist, dist_pmf):
         np_p_value = find_chi2_p_value(discrete_chi2(np_seqs[i], discrete_values, values_proba), r=n_bins_chi2-1)
         print(f'P-value for seq with {seq.size} elements: {p_value}')
         print(f'P-value for np with {seq.size} elements: {np_p_value}')
-        print(f'Null-hypothesis (uniformly distributed) is correct: {p_value > EPS}')
+        print(f'Null-hypothesis (hypergeometrically distributed) is correct: {p_value > EPS}')
         print()
 
 
@@ -183,12 +182,6 @@ if __name__ == "__main__":
     rv_test_pipeline_hypergeom(HypergeometricDistributionInverse(total, bad, n, seed=1),
                                lambda size: rng.hypergeometric(bad, total - bad, n, size=size),
                                stats.hypergeom(M=total, n=bad, N=n).pmf)
-
-
-# In[7]:
-
-
-plt.plot([stats.hypergeom(M=total, n=bad, N=n).pmf(k) for k in range(30)])
 
 
 # In[8]:
