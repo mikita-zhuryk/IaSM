@@ -13,7 +13,7 @@ from matplotlib import pyplot as plt
 # In[ ]:
 
 
-def autocov(seq: np.ndarray, offset: int):
+def autocov(seq: np.ndarray, offset: int):  # !!!!!!!
     if offset == 0:
         return np.mean(seq ** 2)
     return np.mean(seq[:-offset] * seq[offset:])
@@ -24,8 +24,8 @@ def autocov(seq: np.ndarray, offset: int):
 
 def plot_conv_comparison(x, means, np_means, exact_mean: float = 0.5):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 5))
-    ax1.plot(x, np.abs(means - exact_mean))
-    ax2.plot(x, np.abs(np_means - exact_mean))
+    ax1.plot(x, means - exact_mean)
+    ax2.plot(x, np_means - exact_mean)
     ax1.set_xlabel('# samples')
     ax1.set_ylabel('Divergence from mean')
     ax1.set_title('Mean convergence plot')
