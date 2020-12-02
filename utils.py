@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[1]:
 
 
 import numpy as np
@@ -13,10 +13,12 @@ from matplotlib import pyplot as plt
 # In[ ]:
 
 
-def autocov(seq: np.ndarray, offset: int):  # !!!!!!!
+def autocov(seq: np.ndarray, offset: int):
+    seq_mean = seq.mean(axis=-1)
+    normalized_seq = seq - seq_mean
     if offset == 0:
-        return np.mean(seq ** 2)
-    return np.mean(seq[:-offset] * seq[offset:])
+        return np.mean(normalized_seq ** 2, axis=-1)
+    return np.mean(normalized_seq[:-offset] * normalized_seq[offset:], axis=-1)
 
 
 # In[ ]:
