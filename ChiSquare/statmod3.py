@@ -6,10 +6,11 @@
 # ## Распределение хи-квадрат
 # 
 # ### Выполнил:
-# Журик Никита Сергеевич,
+# Журик Никита Сергеевич, \
 # 4 курс, 6 группа
 # ### Преподаватель:
-# Пирштук Иван Казимирович
+# Пирштук Иван Казимирович, \
+# канд. физ.-мат. наук
 
 # In[1]:
 
@@ -125,7 +126,7 @@ if __name__ == "__main__":
     
     rv_test_pipeline_chi2(ChiSquareDistribution(k=8, seed=100500),
                           lambda size: rng.chisquare(8, size=size),
-                          lambda x: sp.special.gammainc(4, x))
+                          lambda x: sp.special.gammainc(4, x / 2))
 
 
 # # Выводы
